@@ -6,6 +6,7 @@ use App\Models\Contracts\IndexableModel;
 use App\Repositories\ItemRepository;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Elastic\ScoutDriverPlus\Searchable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Item extends Model implements IndexableModel, TranslatableContract
 {
-    use HasFactory, Translatable;
+    use HasFactory, Searchable, Translatable;
 
     protected $keyType = 'string';
 
