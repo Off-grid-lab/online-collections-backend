@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Controllers\Api\V1;
+
+use App\Http\Controllers\Controller;
+use App\Models\Collection;
+use Illuminate\Support\Facades\Request;
+
+class CollectionItemController extends Controller
+{
+    public function index(Collection $collection)
+    {
+        $filter = $collection->item_filter;
+        if (! $filter) {
+            abort(404);
+        }
+
+        $parameters = ['filter' => $filter];
+
+        if (request()->has('size')) {
+            $parameters['size'] = request()->integer('size');
+        }
+
+        if (request()->has('page')) {
+            $parameters['page'] = request()->integer('page');
+        }
+
+        if (request()->has('sort')) {
+            $parameters['sort'] = request()->get('sort');
+        }
+
+        $request = Request::create(route('api.v1.items.index', $parameters));
+
+        return app()->handle($request);
+    }
+}
