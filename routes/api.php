@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CollectionController;
+use App\Http\Controllers\Api\V1\CollectionItemController;
 use App\Http\Controllers\Api\V1\ItemController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +22,11 @@ Route::prefix('v1')
         Route::post('items/{id}/views', [ItemController::class, 'incrementViewCount'])->name(
             'items.views'
         );
+
+        Route::apiResource('collections', CollectionController::class)
+            ->names('collections')
+            ->only(['index', 'show']);
+        Route::apiResource('/collections/{collection}/items', CollectionItemController::class)
+            ->names('collections.items')
+            ->only(['index']);
     });

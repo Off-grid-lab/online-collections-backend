@@ -3,13 +3,14 @@
 namespace App\Repositories;
 
 use App\Models\Contracts\IndexableModel;
+use App\Repositories\Contracts\Repository;
 use Elastic\Client\ClientBuilderInterface;
 use Elastic\Elasticsearch\Client;
 use Illuminate\Container\Attributes\Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
-abstract class AbstractRepository
+abstract class AbstractRepository implements Repository
 {
     protected string $index;
 
