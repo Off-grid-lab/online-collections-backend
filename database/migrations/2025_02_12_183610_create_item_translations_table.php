@@ -39,7 +39,7 @@ return new class extends Migration
             $table->string('style_period')->nullable();
             $table->string('current_location')->nullable();
             $table->unique(['item_id', 'locale']);
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->foreign('item_id')->references('id')->on('items')->cascadeOnDelete();
         });
     }
 
